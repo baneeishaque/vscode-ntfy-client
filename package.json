@@ -1,0 +1,70 @@
+{
+  "name": "ntfy-client",
+  "displayName": "NTFY Client",
+  "description": "VS Code toasts + beeps streamed from an ntfy topic (opencode session alerts). Desktop + Web.",
+  "version": "0.1.0",
+  "publisher": "local",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./extension.js",
+  "browser": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ntfy-client.openBeeper",
+        "title": "NTFY: Open Beeper View"
+      },
+      {
+        "command": "ntfy-client.testSound",
+        "title": "NTFY: Test Sound"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "type": "webview",
+          "id": "ntfyClient.beeper",
+          "name": "NTFY Beeper"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "NTFY Client",
+      "properties": {
+        "ntfyClient.server": {
+          "type": "string",
+          "default": "https://ntfy.sh",
+          "description": "ntfy server base URL."
+        },
+        "ntfyClient.topic": {
+          "type": "string",
+          "default": "",
+          "description": "ntfy topic to stream (same value as OPENCODE_NTFY_TOPIC on the VPS)."
+        },
+        "ntfyClient.token": {
+          "type": "string",
+          "default": "",
+          "description": "Optional Bearer token for private ntfy servers."
+        },
+        "ntfyClient.sound": {
+          "type": "boolean",
+          "default": true,
+          "description": "Play a beep through the NTFY Beeper view on incoming messages."
+        },
+        "ntfyClient.toast": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show a VS Code toast on incoming messages (warning for priority >= 4)."
+        }
+      }
+    }
+  }
+}
